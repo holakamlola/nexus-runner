@@ -3,7 +3,7 @@ FROM gitlab/gitlab-runner:latest
 # Open port 80 for Render's mandatory public health check loop
 EXPOSE 80
 
-# Seed config.toml with the correct full university URL and Docker baseline setup
+# Seed config.toml with the CORRECT full university URL
 RUN mkdir -p /etc/gitlab-runner && \
     echo 'concurrent = 4' > /etc/gitlab-runner/config.toml && \
     echo 'check_interval = 3' >> /etc/gitlab-runner/config.toml && \
@@ -27,6 +27,6 @@ RUN mkdir -p /etc/gitlab-runner && \
     echo '  [runners.cache]' >> /etc/gitlab-runner/config.toml && \
     echo '    MaxUploadedArchiveSize = 0' >> /etc/gitlab-runner/config.toml
 
-# Clear entrypoint boundaries and launch system multi-runner run daemon loops
+# Force clean entrypoint boundaries and launch system runner run daemon loops
 ENTRYPOINT []
 CMD ["gitlab-runner", "run", "--user=gitlab-runner", "--working-directory=/home/gitlab-runner"]
